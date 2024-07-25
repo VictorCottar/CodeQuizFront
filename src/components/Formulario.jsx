@@ -15,7 +15,7 @@ export default function Formulario() {
 
   return (
     <>
-      <form action="" className="flex flex-col justify-center item p-8 max-w-[550px] max-h-[550px] space-y-6 border-2 border-r-4 border-b-4 border-orange-500 rounded-lg shadow-shape">
+      <form action="" className="flex flex-col justify-center p-8 max-w-[550px] max-h-[550px] space-y-6 border-2 border-r-4 border-b-4 border-orange-500 rounded-lg shadow-shape">
         <div className='flex items-center justify-center text-center flex-wrap'>
           <h2 className='text-orange-500 text-2xl font-medium'>
             Faça seu login ou <button type="button" onClick={openModal} className='underline'>cadastre-se</button>!
