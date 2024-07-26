@@ -5,12 +5,13 @@ import { RiCloseFill } from "react-icons/ri";
 ModalCadastro.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onRegisterSucess: PropTypes.func.isRequired,
 };
 
-export default function ModalCadastro({ isOpen, onClose }) {
+export default function ModalCadastro({ isOpen, onClose, onRegisterSucess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+
   const handleRegister = async (event) => {
       event.preventDefault();
 
@@ -22,7 +23,7 @@ export default function ModalCadastro({ isOpen, onClose }) {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-      response.status != 400 ? window.alert("Registrado com sucesso, feche para fazer o login", data) : window.alert("Cadastro já existente", data);
+      response.status != 400 ? onRegisterSucess() : window.alert("Email já cadastrado.", data);
     
   };
   
@@ -77,6 +78,7 @@ export default function ModalCadastro({ isOpen, onClose }) {
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                 />
+                
               </div>
               <button
                 type="submit"

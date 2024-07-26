@@ -1,9 +1,21 @@
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useState } from "react";
 import ModalCadastro from "./ModalCadastro";
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
-export default function Formulario() {
-  const [password, setPassword] = useState(false);
+Formulario.propTypes = { 
+  onLoginSucess: PropTypes.func.isRequired
+ }
+
+export default function Formulario({ onLoginSucess }) {
+  const navigate = useNavigate();
+
+  const handleRegisterSucess = () => { 
+    navigate('/escolhaQuiz');
+  }
+  
+  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,12 +37,13 @@ export default function Formulario() {
     });
 
     const data = await response.json();
-    response.status != 400 ? console.log("logado com sucesso", data) : console.log("Erro ao logar", data);
+    response.status != 400 ? console.log( 'entrou') : window.alert("Erro ao logar.", data);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     handleLogin();
+    onLoginSucess();
   };
 
   return (
@@ -97,7 +110,7 @@ export default function Formulario() {
           </button>
         </div>
       </form>
-      <ModalCadastro isOpen={isModalOpen} onClose={closeModal} />
+      <ModalCadastro onRegisterSucess={handleRegisterSucess} isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
 }
