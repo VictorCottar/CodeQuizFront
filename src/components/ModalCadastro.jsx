@@ -24,7 +24,6 @@ export default function ModalCadastro({ isOpen, onClose, onRegisterSucess }) {
       });
       const data = await response.json();
       response.status != 400 ? onRegisterSucess() : window.alert("Email já cadastrado.", data);
-    
   };
   
   if (!isOpen) return null;

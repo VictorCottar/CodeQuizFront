@@ -37,13 +37,12 @@ export default function Formulario({ onLoginSucess }) {
     });
 
     const data = await response.json();
-    response.status != 400 ? console.log( 'entrou') : window.alert("Erro ao logar.", data);
+    response.status != 400 ? onLoginSucess() : window.alert("Erro ao logar.", data);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     handleLogin();
-    onLoginSucess();
   };
 
   return (
@@ -70,7 +69,7 @@ export default function Formulario({ onLoginSucess }) {
               Email
             </label>
             <input
-              className="p-3 rounded-lg text-orange-500 shadow-shape focus:outline-none"
+              className="p-3 rounded-lg bg-neutral-300 text-orange-500 shadow-shape focus:outline-none"
               type="email"
               placeholder="Digite seu email"
               value={email}
@@ -87,7 +86,7 @@ export default function Formulario({ onLoginSucess }) {
             </label>
             <div className="relative">
               <input
-                className="p-3 rounded-lg text-orange-500 shadow-shape focus:outline-none w-full"
+                className="p-3 rounded-lg bg-neutral-300 text-orange-500 shadow-shape focus:outline-none w-full"
                 type={showPassword ? "text" : "password"}
                 placeholder="Digite sua senha"
                 value={password}
