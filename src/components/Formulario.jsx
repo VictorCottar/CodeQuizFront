@@ -49,7 +49,7 @@ export default function Formulario({ onLoginSucess }) {
     <>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col justify-center p-8 max-w-[550px] max-h-[550px] space-y-6 border-2 border-r-4 border-b-4 border-orange-500 rounded-lg shadow-shape"
+        className="flex flex-col justify-center p-8 sm:w-[510px] sm:h-[500px] space-y-6 border-2 border-r-4 border-b-4 border-orange-500 rounded-lg shadow-shape"
       >
         <div className="flex items-center justify-center text-center flex-wrap">
           <h2 className="text-orange-500 text-2xl font-medium">
@@ -69,7 +69,7 @@ export default function Formulario({ onLoginSucess }) {
               Email
             </label>
             <input
-              className="p-3 rounded-lg bg-neutral-300 text-orange-500 shadow-shape focus:outline-none"
+              className="p-3 rounded-lg text-orange-500 shadow-shape focus:outline-none"
               type="email"
               placeholder="Digite seu email"
               value={email}
@@ -86,7 +86,7 @@ export default function Formulario({ onLoginSucess }) {
             </label>
             <div className="relative">
               <input
-                className="p-3 rounded-lg bg-neutral-300 text-orange-500 shadow-shape focus:outline-none w-full"
+                className="p-3 rounded-lg  text-orange-500 shadow-shape focus:outline-none w-full"
                 type={showPassword ? "text" : "password"}
                 placeholder="Digite sua senha"
                 value={password}

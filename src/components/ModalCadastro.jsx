@@ -9,23 +9,25 @@ ModalCadastro.propTypes = {
 };
 
 export default function ModalCadastro({ isOpen, onClose, onRegisterSucess }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleRegister = async (event) => {
-      event.preventDefault();
+    event.preventDefault();
 
-      const response = await fetch('http://localhost:3000/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await response.json();
-      response.status != 400 ? onRegisterSucess() : window.alert("Email já cadastrado.", data);
+    const response = await fetch("http://localhost:3000/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await response.json();
+    response.status != 400
+      ? onRegisterSucess()
+      : window.alert("Email já cadastrado.", data);
   };
-  
+
   if (!isOpen) return null;
 
   if (isOpen) {
@@ -34,18 +36,20 @@ export default function ModalCadastro({ isOpen, onClose, onRegisterSucess }) {
         <div className="fixed inset-0 bg-black/90 flex justify-center items-center m-auto">
           <form
             onSubmit={handleRegister}
-            className="flex flex-col justify-center p-8 m-auto max-w-[550px] max-h-[550px] space-y-6 border-2 border-r-4 border-b-4 border-orange-500 bg-neutral-700 rounded-lg shadow-shape"
+            className="flex flex-col justify-center p-6 m-auto sm:w-[510px] sm:h-[500px] space-y-6 border-2 border-r-4 border-b-4 border-orange-500 bg-neutral-700 rounded-lg shadow-shape"
           >
             <div className="flex justify-end">
-            <button className="" onClick={onClose}>
-              <RiCloseFill className="size-8 text-red-700" />
-            </button>
+              <button className="justify-end" onClick={onClose}>
+                <RiCloseFill className="size-8 text-red-700" />
+              </button>
             </div>
-            <div className="flex items-center">
+            <div className="flex justify-center items-center">
               <h2 className="text-orange-500 text-3xl font-medium">
                 Faça seu cadastro!
               </h2>
             </div>
+
+
             <div className="flex flex-col items-center space-y-4">
               <div className="flex flex-col space-y-2 w-11/12">
                 <label
@@ -77,7 +81,6 @@ export default function ModalCadastro({ isOpen, onClose, onRegisterSucess }) {
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                 />
-                
               </div>
               <button
                 type="submit"
