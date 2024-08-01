@@ -37,17 +37,17 @@ export default function Quiz() {
           </div>
 
           <div className="flex flex-col justify-center items-center space-y-4">
-            <button className="bg-orange-500 text-neutral-100 text-xl  md:text-3xl p-2 sm:p-3 md:p-4 hover:bg-orange-400 rounded-lg w-full ">
+            <button className="bg-neutral-100 text-orange-500 border-2 border-orange-500 text-xl md:text-3xl p-2 sm:p-3 md:p-4 hover:bg-orange-500 hover:text-white rounded-lg w-full transition duration-300 ease-in-out">
               count()
             </button>
-            <button className="bg-orange-500 text-neutral-100 text-xl  md:text-3xl p-2 sm:p-3 md:p-4 hover:bg-orange-400 rounded-lg w-full ">
+            <button className="bg-neutral-100 text-orange-500 border-2 border-orange-500 text-xl md:text-3xl p-2 sm:p-3 md:p-4 hover:bg-orange-500 hover:text-white rounded-lg w-full transition duration-300 ease-in-out">
               size()
             </button>
-            <button className="bg-orange-500 text-neutral-100 text-xl  md:text-3xl p-2 sm:p-3 md:p-4 hover:bg-orange-400 rounded-lg w-full ">
+            <button className="bg-neutral-100 text-orange-500 border-2 border-orange-500 text-xl md:text-3xl p-2 sm:p-3 md:p-4 hover:bg-orange-500 hover:text-white rounded-lg w-full transition duration-300 ease-in-out">
               length()
             </button>
-            <button className="bg-orange-500 text-neutral-100 text-xl  md:text-3xl p-2 sm:p-3 md:p-4 hover:bg-orange-400 rounded-lg w-full">
-              len() len() len()
+            <button className="bg-neutral-100 text-orange-500 border-2 border-orange-500 text-xl md:text-3xl p-2 sm:p-3 md:p-4 hover:bg-orange-500 hover:text-white rounded-lg w-full transition duration-300 ease-in-out">
+              len()
             </button>
           </div>
           

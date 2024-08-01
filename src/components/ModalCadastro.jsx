@@ -48,8 +48,6 @@ export default function ModalCadastro({ isOpen, onClose, onRegisterSucess }) {
                 Faça seu cadastro!
               </h2>
             </div>
-
-
             <div className="flex flex-col items-center space-y-4">
               <div className="flex flex-col space-y-2 w-11/12">
                 <label

@@ -12,7 +12,7 @@ export default function Formulario({ onLoginSucess }) {
   const navigate = useNavigate();
 
   const handleRegisterSucess = () => { 
-    navigate('/escolhaQuiz');
+    navigate('/quiz');
   }
   
   const [password, setPassword] = useState("");
