@@ -103,7 +103,7 @@ export default function Formulario({ onLoginSucess }) {
           </div>
           <button
             type="submit"
-            className="bg-orange-500 p-3 rounded-lg shadow-shape w-11/12 hover:bg-orange-300"
+            className="bg-orange-500 p-3 rounded-lg shadow-shape w-11/12 hover:bg-orange-300 transition duration-300 ease-in-out"
           >
             Login
           </button>
