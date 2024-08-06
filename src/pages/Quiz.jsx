@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Endgame from "../components/Endgame";
 import axios from "axios";
 import { CircleCheckBig } from "lucide-react";
 
@@ -7,6 +8,7 @@ export default function Quiz() {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answeredQuestionsCount, setAnsweredQuestionsCount] = useState(0);
+  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
 
   const topics = [
     "Python",
@@ -25,11 +27,14 @@ export default function Quiz() {
 
   const fetchQuestions = async (topic) => {
     try {
-      const response = await axios.get(`http://localhost:3000/questions/${topic}`);
+      const response = await axios.get(
+        `http://localhost:3000/questions/${topic}`
+      );
       if (response.status === 200) {
         setQuestions(response.data);
         setCurrentQuestionIndex(0);
         setAnsweredQuestionsCount(0);
+        setCorrectAnswersCount(0);
       } else {
         throw new Error("Erro ao buscar questões.");
       }
@@ -41,7 +46,9 @@ export default function Quiz() {
 
   const handleAnswerClick = async (answer) => {
     try {
-      await axios.post("http://localhost:3000/submit-answer", { answer });
+      if (answer === questions[currentQuestionIndex].correct_answer) {
+        setCorrectAnswersCount((prevCount) => prevCount + 1);
+      }
       setAnsweredQuestionsCount((prevCount) => prevCount + 1);
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     } catch (error) {
@@ -49,17 +56,16 @@ export default function Quiz() {
     }
   };
 
+  const handleRestart = () => {
+    setSelectedTopic("");
+    setQuestions([]);
+    setCurrentQuestionIndex(0);
+    setAnsweredQuestionsCount(0);
+    setCorrectAnswersCount(0);
+  };
+
   if (answeredQuestionsCount >= 5) {
-    return (
-      <div className="bg-neutral-700 w-screen h-screen flex flex-col items-center space-y-10 justify-center">
-        <h1 className="text-orange-500 text-4xl sm:text-5xl font-semibold text-center">
-          Quiz Concluído!
-        </h1>
-        <p className="text-orange-500 text-xl sm:text-4xl font-semibold text-center">
-          Você respondeu 5 perguntas.
-        </p>
-      </div>
-    );
+    return <Endgame correctAnswersCount={correctAnswersCount} onRestart={handleRestart} />;
   }
 
   if (!selectedTopic) {
@@ -113,7 +119,12 @@ export default function Quiz() {
             </h1>
           </div>
           <div className="flex flex-col justify-center items-center space-y-4">
-            {[currentQuestion.option1, currentQuestion.option2, currentQuestion.option3, currentQuestion.correct_answer].map((option, index) => (
+            {[
+              currentQuestion.option1,
+              currentQuestion.option2,
+              currentQuestion.option3,
+              currentQuestion.correct_answer,
+            ].map((option, index) => (
               <button
                 key={index}
                 className="bg-neutral-100 text-orange-500 border-2 border-orange-500 text-xl md:text-3xl p-2 sm:p-3 md:p-4 hover:bg-orange-500 hover:text-white rounded-lg w-full transition duration-300 ease-in-out"
