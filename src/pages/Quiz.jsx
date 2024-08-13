@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Endgame from "../components/Endgame";
+import SelectionTopics from "../components/SelectionTopics";
 import axios from "axios";
-import { CircleCheckBig } from "lucide-react";
+
 
 export default function Quiz() {
   const [selectedTopic, setSelectedTopic] = useState("");
@@ -10,15 +11,7 @@ export default function Quiz() {
   const [answeredQuestionsCount, setAnsweredQuestionsCount] = useState(0);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
 
-  const topics = [
-    "Python",
-    "Java",
-    "JavaScript",
-    "Node",
-    "ReactJS",
-    "HTML",
-    "CSS",
-  ];
+
 
   const handleTopicClick = async (topic) => {
     setSelectedTopic(topic);
@@ -64,43 +57,32 @@ export default function Quiz() {
     setCorrectAnswersCount(0);
   };
 
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
   if (answeredQuestionsCount >= 5) {
     return <Endgame correctAnswersCount={correctAnswersCount} onRestart={handleRestart} />;
   }
 
   if (!selectedTopic) {
-    return (
-      <div className="bg-neutral-700 w-screen h-screen flex flex-col items-center space-y-12 justify-center">
-        <h1 className="text-orange-500 sm:text-6xl text-5xl font-semibold text-center">
-          CodeQuiz
-        </h1>
-        <div className="bg-neutral-700 p-8 border-2 border-r-4 border-b-4 border-orange-500 rounded-lg w-5/6 h-4/6 sm:w-5/12 flex flex-col justify-center items-center pt-3 space-y-12 shadow-shape">
-          <div className="flex flex-wrap justify-center text-center">
-            <h1 className="font-medium text-2xl md:text-4xl text-orange-500 mt-4">
-              Escolha o tema do seu Quiz!
-            </h1>
-          </div>
-          <div className="flex flex-row justify-around items-center space-x-24 space-y-4">
-            <div className="flex flex-col space-y-4">
-              {topics.map((topic) => (
-                <button
-                  key={topic}
-                  className="text-3xl text-neutral-200 hover:text-orange-500"
-                  onClick={() => handleTopicClick(topic)}
-                >
-                  <CircleCheckBig size={24} className="inline-block mr-2" />
-                  {topic}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    return <SelectionTopics handleTopicClick={handleTopicClick} />
+    
   }
 
   if (questions.length > 0 && currentQuestionIndex < questions.length) {
     const currentQuestion = questions[currentQuestionIndex];
+
+    const shuffledOptions = shuffleArray([
+      currentQuestion.option1,
+      currentQuestion.option2,
+      currentQuestion.option3,
+      currentQuestion.correct_answer,
+    ]);
 
     return (
       <div className="bg-neutral-700 w-screen h-screen flex flex-col items-center space-y-10 justify-center">
@@ -119,12 +101,7 @@ export default function Quiz() {
             </h1>
           </div>
           <div className="flex flex-col justify-center items-center space-y-4">
-            {[
-              currentQuestion.option1,
-              currentQuestion.option2,
-              currentQuestion.option3,
-              currentQuestion.correct_answer,
-            ].map((option, index) => (
+          {shuffledOptions.map((option, index) => (
               <button
                 key={index}
                 className="bg-neutral-100 text-orange-500 border-2 border-orange-500 text-xl md:text-3xl p-2 sm:p-3 md:p-4 hover:bg-orange-500 hover:text-white rounded-lg w-full transition duration-300 ease-in-out"
@@ -138,6 +115,5 @@ export default function Quiz() {
       </div>
     );
   }
-
   return null;
 }
